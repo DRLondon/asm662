@@ -3,3 +3,7 @@ See ASM.txt and DASM.txt for documentation on each.
 
 Source code is available via anonymous CVS.  Instructions are at
 http://sourceforge.net/projects/pgmfi/
+
+
+ASM is ASM to BIN
+DASM is BIN to ASM

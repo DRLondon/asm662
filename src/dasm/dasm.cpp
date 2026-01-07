@@ -228,7 +228,11 @@ int main(int argc, char **argv)
 		printf("unable to open %s\n", argv[1]);
 		return -1;
 	}
+
+	// Copy 32768 bytes of data from fp into ds.rom variable
 	fread(ds.rom, 32768, 1, fp);
+
+	// Close the file stream
 	fclose(fp);
 
 	if(!strcmp(argv[2], "-")) {
@@ -244,6 +248,7 @@ int main(int argc, char **argv)
 	// init 66207 entry vectors
 	init_66207(&ds, &dq, &dout);
 
+	// If there are additional arguments, set them to table variables
 	if(argv[3]) tbladdr_lo = hextoi(argv[3]);
 	if(argv[4]) tbladdr_hi = hextoi(argv[4]);
 
