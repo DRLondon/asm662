@@ -14,7 +14,11 @@ static unsigned tbladdr_lo=0x5465,tbladdr_hi=0x7ff0;
 extern "C" const char *get_rom_label(unsigned addr)
 {
 	static char lbuf[64];
+
+	// Get label from specific address from DASM Output
 	const char *l = _dout->get_label(addr);
+
+	// If l isn't null, add stuff
 	if(l) {
 		_dqueue->add(addr, _D->pc, l, _D->dd, _D->lrb, _D->usp);
 		return l;
@@ -47,11 +51,16 @@ extern "C" const char *get_ram_label(unsigned addr, int digits)
 {
 	static char lbuf1[64], lbuf2[64];
 	static char *lbuf=lbuf2;
+
 	lbuf = (lbuf == lbuf1) ? lbuf2 : lbuf1;
-	map<unsigned, const char *>::iterator i =
-		_SFRs.find(addr);
+
+	map<unsigned, const char *>::iterator i = _SFRs.find(addr);
+
 	if(i != _SFRs.end())
+	{
 		return (*i).second;
+	}
+
 	sprintf(lbuf, "0%0*xh", digits, addr);
 	return lbuf;
 }
